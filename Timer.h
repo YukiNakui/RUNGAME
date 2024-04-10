@@ -1,13 +1,15 @@
 #pragma once
 #include "Engine/GameObject.h"
-class Player :
+
+class Timer :
     public GameObject
 {
-	int hModel_;
+	double TIMER_INIT_TIME;
+	double timer_;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
-	Player(GameObject* parent);
+	Timer(GameObject* parent);
 
 	//初期化
 	void Initialize() override;
@@ -21,8 +23,12 @@ public:
 	//開放
 	void Release() override;
 
-	//何かに当たった
-	//引数：pTarget 当たった相手
-	void OnCollision(GameObject* pTarget) override;
+	double cdTimer_;
+	bool isTimerRun_;
+	void SetTimer(double _timer);
+	void ResetTimer();
+	bool IsTimeOver();
+	void StartTimer();
+	void StopTimer();
 };
 

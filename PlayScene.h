@@ -1,8 +1,10 @@
 #pragma once
 #include "Engine/GameObject.h"
+
 class PlayScene :
     public GameObject
 {
+	double cdTimer_;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
