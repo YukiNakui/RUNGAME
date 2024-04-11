@@ -13,7 +13,6 @@ void Load::Initialize()
 	assert(hModel_ >= 0);
 	transform_.position_.z = 13.0f;
 	transform_.scale_ = XMFLOAT3(2.0f, 1.0f, 2.5f);
-	//Instantiate<Enemy>(this);
 }
 
 void Load::Update()

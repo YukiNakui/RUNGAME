@@ -4,6 +4,7 @@ class Enemy :
     public GameObject
 {
 	int hModel_;
+	float moveSpeed_;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）

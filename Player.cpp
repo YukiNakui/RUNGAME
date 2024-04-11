@@ -2,6 +2,7 @@
 #include"Engine/Model.h"
 #include"Engine/Input.h"
 #include"Engine/SphereCollider.h"
+#include"Engine/SceneManager.h"
 
 Player::Player(GameObject* parent)
 	:GameObject(parent,"Player")
@@ -29,6 +30,13 @@ void Player::Update()
 	{
 		transform_.position_.x -= 2.5f;
 	}
+	else if (Input::IsKeyDown(DIK_SPACE) && !(transform_.position_.y > 0))
+	{
+		
+	}
+
+	if (transform_.position_.y <= 0)
+		transform_.position_.y = 0;
 }
 
 void Player::Draw()
@@ -44,4 +52,6 @@ void Player::Release()
 void Player::OnCollision(GameObject* pTarget)
 {
 	KillMe();
+	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
+	pSceneManager->ChangeScene(SCENE_ID_GAMEOVER);
 }
