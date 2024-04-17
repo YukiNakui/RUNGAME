@@ -22,11 +22,11 @@ void Player::Initialize()
 
 void Player::Update()
 {
-	if (Input::IsKeyDown(DIK_RIGHT) && (transform_.position_.x < 2.5f))
+	if ((Input::IsKeyDown(DIK_RIGHT) || Input::IsKeyDown(DIK_D)) && (transform_.position_.x < 2.5f))
 	{
 		transform_.position_.x += 2.5f;
 	}
-	else if (Input::IsKeyDown(DIK_LEFT) && (transform_.position_.x > -2.5f))
+	else if ((Input::IsKeyDown(DIK_LEFT) || Input::IsKeyDown(DIK_A)) && (transform_.position_.x > -2.5f))
 	{
 		transform_.position_.x -= 2.5f;
 	}
