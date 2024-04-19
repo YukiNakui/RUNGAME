@@ -1,9 +1,15 @@
 #pragma once
 #include "Engine/GameObject.h"
+
+const float GRAVITY = 4.0f / 60.0f;
+const float JUMP_HEIGHT = 3.0f;
+
 class Player :
     public GameObject
 {
 	int hModel_;
+	float jumpSpeed_;
+	bool jumpNow;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）

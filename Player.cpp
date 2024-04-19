@@ -16,27 +16,40 @@ void Player::Initialize()
 	transform_.position_.z = -2.0f;
 	transform_.position_.y = 0.0f;
 	transform_.scale_ = XMFLOAT3(1.5f, 1.5f, 1.5f);
+	jumpSpeed_ = 0.0f;
+	jumpNow = false;
 	SphereCollider* collision = new SphereCollider(XMFLOAT3(0, 0.5f, 0), 0.5f);
 	AddCollider(collision);
 }
 
 void Player::Update()
 {
-	if ((Input::IsKeyDown(DIK_RIGHT) || Input::IsKeyDown(DIK_D)) && (transform_.position_.x < 2.5f))
+	if (!jumpNow)
 	{
-		transform_.position_.x += 2.5f;
+		if ((Input::IsKeyDown(DIK_RIGHT) || Input::IsKeyDown(DIK_D)) && (transform_.position_.x < 2.5f))
+		{
+			transform_.position_.x += 2.5f;
+		}
+		else if ((Input::IsKeyDown(DIK_LEFT) || Input::IsKeyDown(DIK_A)) && (transform_.position_.x > -2.5f))
+		{
+			transform_.position_.x -= 2.5f;
+		}
 	}
-	else if ((Input::IsKeyDown(DIK_LEFT) || Input::IsKeyDown(DIK_A)) && (transform_.position_.x > -2.5f))
+	if (Input::IsKeyDown(DIK_SPACE) && !(transform_.position_.y > 0))
 	{
-		transform_.position_.x -= 2.5f;
-	}
-	else if (Input::IsKeyDown(DIK_SPACE) && !(transform_.position_.y > 0))
-	{
-		
+		jumpNow = true;
+		jumpSpeed_ = -sqrt(2 * GRAVITY * JUMP_HEIGHT);
 	}
 
-	if (transform_.position_.y <= 0)
+	jumpSpeed_ += GRAVITY;
+	transform_.position_.y -= jumpSpeed_;
+
+	if (transform_.position_.y <0)
+	{
+		jumpNow = false;
 		transform_.position_.y = 0;
+		jumpSpeed_ = 0.0f;
+	}
 }
 
 void Player::Draw()
