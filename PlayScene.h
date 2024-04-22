@@ -1,13 +1,17 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include"Player.h"
 
 class PlayScene :
     public GameObject
 {
+	int hImage_;
 	double cdTimer_;
 	double timerRate;
 	int randW;
 	int randX;
+	Player* pPlayer;
+	float deathTimer_;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）

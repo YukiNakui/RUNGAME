@@ -18,6 +18,7 @@ void Player::Initialize()
 	transform_.scale_ = XMFLOAT3(1.5f, 1.5f, 1.5f);
 	jumpSpeed_ = 0.0f;
 	jumpNow = false;
+	deadNow_ = false;
 	SphereCollider* collision = new SphereCollider(XMFLOAT3(0, 0.5f, 0), 0.5f);
 	AddCollider(collision);
 }
@@ -65,6 +66,10 @@ void Player::Release()
 void Player::OnCollision(GameObject* pTarget)
 {
 	KillMe();
-	SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
-	pSceneManager->ChangeScene(SCENE_ID_GAMEOVER);
+	deadNow_ = true;
+}
+
+bool Player::GetDeadNow()
+{
+	return deadNow_;
 }

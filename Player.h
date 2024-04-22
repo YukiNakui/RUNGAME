@@ -8,6 +8,7 @@ class Player :
     public GameObject
 {
 	int hModel_;
+	bool deadNow_;
 	float jumpSpeed_;
 	bool jumpNow;
 public:
@@ -30,5 +31,7 @@ public:
 	//‰½‚©‚É“–‚½‚Á‚½
 	//ˆø”FpTarget “–‚½‚Á‚½‘Šè
 	void OnCollision(GameObject* pTarget) override;
+
+	bool GetDeadNow();
 };
 
