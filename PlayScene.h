@@ -12,6 +12,10 @@ class PlayScene :
 	int randX;
 	Player* pPlayer;
 	float deathTimer_;
+	float sinCamAngle_;
+	float sinImgAngle_;
+	XMFLOAT3 camPos_;
+	Transform imgTrans;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）

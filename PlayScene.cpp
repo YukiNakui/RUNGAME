@@ -19,12 +19,16 @@ void PlayScene::Initialize()
 	randW = 0;
 	randX = 0;
 	deathTimer_ = 0.0f;
+	sinCamAngle_ = 0;
+	sinImgAngle_ = 0;
 
 	Instantiate<Load>(this);
 	pPlayer = Instantiate<Player>(this);
-
-	Camera::SetPosition(XMFLOAT3(0, 3, -8));
+	camPos_ = { 0, 3, -8 };
+	Camera::SetPosition(camPos_);
 	Camera::SetTarget(XMFLOAT3(0, 0, 5));
+	imgTrans.position_ = { -0.8,0.5,0 };
+	imgTrans.scale_ = { 0.15,0.15,0.15 };
 }
 
 void PlayScene::Update()
@@ -32,6 +36,14 @@ void PlayScene::Update()
 	if (pPlayer->GetDeadNow())
 	{
 		deathTimer_ += 1.0f / 60.0f;
+		sinCamAngle_ += 20.0f;
+		sinImgAngle_ += 40.0f;
+		float sinCamValue = sinf(sinCamAngle_ * 3.14f / 180.0f);
+		float sinImgValue = sinf(sinImgAngle_ * 3.14f / 180.0f);
+		camPos_.x = sinCamValue * 2.0f;
+		Camera::SetPosition(camPos_);
+		Camera::SetTarget(XMFLOAT3(camPos_.x, 0, 5));
+		imgTrans.position_.x = imgTrans.position_.x + (sinImgValue) / 15.0f;
 		if (deathTimer_ >= 1.5f)
 		{
 			SceneManager* pSceneManager = (SceneManager*)FindObject("SceneManager");
@@ -64,9 +76,6 @@ void PlayScene::Update()
 
 void PlayScene::Draw()
 {
-	Transform imgTrans;
-	imgTrans.position_ = { -0.8,0.5,0};
-	imgTrans.scale_ = { 0.2,0.2,0.2 };
 	Image::SetTransform(hImage_, imgTrans);
 	Image::Draw(hImage_);
 }

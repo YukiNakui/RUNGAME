@@ -7,10 +7,14 @@ const float JUMP_HEIGHT = 3.0f;
 class Player :
     public GameObject
 {
+	float moveSpeed_;
 	int hModel_;
 	bool deadNow_;
 	float jumpSpeed_;
 	bool jumpNow;
+	bool moveRNow;
+	bool moveLNow;
+	float posXTmp;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
