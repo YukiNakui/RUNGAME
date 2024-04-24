@@ -17,29 +17,6 @@ void Banner::Initialize()
 
 void Banner::Update()
 {
-	switch (state_)
-	{
-	case Ready:
-		cdTimer_ += 1.0f / 60.0f;
-		if (cdTimer_ >= 1.5f)
-		{
-			state_ = Go;
-			cdTimer_ = 0.0f;
-		}
-		break;
-	case Go:
-		cdTimer_ += 1.0f / 60.0f;
-		if (cdTimer_ >= 1.5f)
-		{
-			state_ = Play;
-			cdTimer_ = 0.0f;
-		}
-		break;
-	case Play:
-		break;
-	default:
-		break;
-	}
 }
 
 void Banner::Draw()
@@ -60,6 +37,11 @@ void Banner::Draw()
 
 void Banner::Release()
 {
+}
+
+void Banner::SetState(State _state)
+{
+	state_ = _state;
 }
 
 int Banner::GetState()

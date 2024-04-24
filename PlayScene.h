@@ -1,16 +1,11 @@
 #pragma once
 #include "Engine/GameObject.h"
 #include"Player.h"
+#include"Banner.h"
 
 class PlayScene :
     public GameObject
 {
-	enum State {
-		Ready,
-		Go,
-		Play,
-	};
-	State state_;
 	int hImage_;
 	int hReadyImage_;
 	int hGoImage_;
@@ -19,6 +14,7 @@ class PlayScene :
 	int randW;
 	int randX;
 	Player* pPlayer;
+	Banner* pBanner;
 	float deathTimer_;
 	float sinCamAngle_;
 	float sinImgAngle_;

@@ -3,12 +3,6 @@
 class Banner :
     public GameObject
 {
-	enum State {
-		Ready,
-		Go,
-		Play,
-	};
-	State state_;
 	int hReadyImage_;
 	int hGoImage_;
 	double cdTimer_;
@@ -27,6 +21,15 @@ public:
 	//ŠJ•ú
 	void Release() override;
 
+
+	enum State {
+		Ready,
+		Go,
+		Play,
+	};
+	State state_;
+
+	void SetState(State _state);
 	int GetState();
 };
 

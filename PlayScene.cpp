@@ -25,7 +25,6 @@ void PlayScene::Initialize()
 	deathTimer_ = 0.0f;
 	sinCamAngle_ = 0;
 	sinImgAngle_ = 0;
-	state_ = State::Ready;
 	
 	camPos_ = { 0, 3, -8 };
 	Camera::SetPosition(camPos_);
@@ -35,29 +34,30 @@ void PlayScene::Initialize()
 
 	Instantiate<Load>(this);
 	pPlayer = Instantiate<Player>(this);
+	pBanner = Instantiate<Banner>(this);
 }
 
 void PlayScene::Update()
 {
-	switch (state_)
+	switch (pBanner->GetState())
 	{
-	case PlayScene::Ready:
+	case Banner::Ready:
 		cdTimer_ += 1.0f / 60.0f;
 		if (cdTimer_ >= 1.5f)
 		{
-			state_ = PlayScene::Go;
+			pBanner->SetState(Banner::Go);
 			cdTimer_ = 0.0f;
 		}
 		break;
-	case PlayScene::Go:
+	case Banner::Go:
 		cdTimer_ += 1.0f / 60.0f;
 		if (cdTimer_ >= 1.5f)
 		{
-			state_ = PlayScene::Play;
+			pBanner->SetState(Banner::Play);
 			cdTimer_ = 0.0f;
 		}
 		break;
-	case PlayScene::Play:
+	case Banner::Play:
 		if (pPlayer->GetDeadNow())
 		{
 			deathTimer_ += 1.0f / 60.0f;
@@ -65,9 +65,10 @@ void PlayScene::Update()
 			sinImgAngle_ += 40.0f;
 			float sinCamValue = sinf(sinCamAngle_ * 3.14f / 180.0f);
 			float sinImgValue = sinf(sinImgAngle_ * 3.14f / 180.0f);
-			camPos_.x = sinCamValue * 2.0f;
-			Camera::SetPosition(camPos_);
-			Camera::SetTarget(XMFLOAT3(camPos_.x, 0, 5));
+			camPos_.x = (sinCamValue * 2.0f)/5;
+			camPos_.y = (sinCamValue * 2.0f)/5;
+			//Camera::SetPosition(camPos_);
+			Camera::SetTarget(XMFLOAT3(camPos_.x, camPos_.y, 5));
 			imgTrans.position_.x = imgTrans.position_.x + (sinImgValue) / 15.0f;
 			if (deathTimer_ >= 1.5f)
 			{
@@ -108,18 +109,6 @@ void PlayScene::Draw()
 {
 	Image::SetTransform(hImage_, imgTrans);
 	Image::Draw(hImage_);
-	Transform readyTrans;
-	Transform goTrans;
-	if (state_ == PlayScene::Ready)
-	{
-		Image::SetTransform(hReadyImage_, readyTrans);
-		Image::Draw(hReadyImage_);
-	}
-	else if (state_ == PlayScene::Go)
-	{
-		Image::SetTransform(hGoImage_, goTrans);
-		Image::Draw(hGoImage_);
-	}
 }
 
 void PlayScene::Release()
