@@ -1,8 +1,6 @@
 #pragma once
 #include "Engine/GameObject.h"
-#include"Player.h"
-
-class PlayScene :
+class Banner :
     public GameObject
 {
 	enum State {
@@ -11,23 +9,11 @@ class PlayScene :
 		Play,
 	};
 	State state_;
-	int hImage_;
 	int hReadyImage_;
 	int hGoImage_;
 	double cdTimer_;
-	double timerRate;
-	int randW;
-	int randX;
-	Player* pPlayer;
-	float deathTimer_;
-	float sinCamAngle_;
-	float sinImgAngle_;
-	XMFLOAT3 camPos_;
-	Transform imgTrans;
 public:
-	//コンストラクタ
-	//引数：parent  親オブジェクト（SceneManager）
-	PlayScene(GameObject* parent);
+	Banner(GameObject* parent);
 
 	//初期化
 	void Initialize() override;
@@ -40,5 +26,7 @@ public:
 
 	//開放
 	void Release() override;
+
+	int GetState();
 };
 

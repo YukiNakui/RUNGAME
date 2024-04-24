@@ -11,6 +11,7 @@ class Player :
 	int hModel_;
 	bool deadNow_;
 	float jumpSpeed_;
+	bool canJump;
 	bool jumpNow;
 	bool moveRNow;
 	bool moveLNow;

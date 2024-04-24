@@ -17,7 +17,8 @@ void Player::Initialize()
 	transform_.position_.y = 0.0f;
 	transform_.scale_ = XMFLOAT3(1.5f, 1.5f, 1.5f);
 	jumpSpeed_ = 0.0f;
-	moveSpeed_ = 0.5f;
+	moveSpeed_ = 0.1f;
+	canJump = true;
 	jumpNow = false;
 	moveRNow = false;
 	moveLNow = false;
@@ -31,40 +32,49 @@ void Player::Update()
 {
 	if (!jumpNow)
 	{
-		if(!(moveRNow||moveLNow))
-		if ((Input::IsKeyDown(DIK_RIGHT) || Input::IsKeyDown(DIK_D)) && (transform_.position_.x < 2.5f))
+		if (!(moveRNow || moveLNow))
 		{
-			moveRNow = true;
+			if ((Input::IsKeyDown(DIK_RIGHT) || Input::IsKeyDown(DIK_D)) && (transform_.position_.x < 2.5f))
+			{
+				moveRNow = true;
+				canJump = false;
+			}
+			else if ((Input::IsKeyDown(DIK_LEFT) || Input::IsKeyDown(DIK_A)) && (transform_.position_.x > -2.5f))
+			{
+				moveLNow = true;
+				canJump = false;
+			}
 		}
-		else if ((Input::IsKeyDown(DIK_LEFT) || Input::IsKeyDown(DIK_A)) && (transform_.position_.x > -2.5f))
+		if (moveRNow)
 		{
-			moveLNow = true;
+			transform_.position_.x += moveSpeed_;
+			posXTmp += moveSpeed_;
+			if (posXTmp >= 2.5f)
+			{
+				moveRNow = false;
+				posXTmp = 0.0f;
+				canJump = true;
+			}
+		}
+		if (moveLNow)
+		{
+			transform_.position_.x -= moveSpeed_;
+			posXTmp += moveSpeed_;
+			if (posXTmp >= 2.5f)
+			{
+				moveLNow = false;
+				posXTmp = 0.0f;
+				canJump = true;
+			}
 		}
 	}
-	if (moveRNow)
+	if (canJump)
 	{
-		transform_.position_.x += moveSpeed_;
-		posXTmp += moveSpeed_;
-		if (posXTmp >= 2.5f)
+		if (Input::IsKeyDown(DIK_SPACE) && !(transform_.position_.y > 0))
 		{
-			moveRNow = false;
-			posXTmp = 0.0f;
+			jumpNow = true;
+			jumpSpeed_ = -sqrt(2 * GRAVITY * JUMP_HEIGHT);
 		}
-	}
-	if (moveLNow)
-	{
-		transform_.position_.x -= moveSpeed_;
-		posXTmp += moveSpeed_;
-		if (posXTmp >= 2.5f)
-		{
-			moveLNow = false;
-			posXTmp = 0.0f;
-		}
-	}
-	if (Input::IsKeyDown(DIK_SPACE) && !(transform_.position_.y > 0))
-	{
-		jumpNow = true;
-		jumpSpeed_ = -sqrt(2 * GRAVITY * JUMP_HEIGHT);
 	}
 
 	jumpSpeed_ += GRAVITY;

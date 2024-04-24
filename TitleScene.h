@@ -5,7 +5,8 @@
 class TitleScene :
     public GameObject
 {
-	int hImage_;
+	int hTitleImage_;
+	int hPushImage_;
 	Text* pText_;
 public:
 	//コンストラクタ

@@ -4,15 +4,16 @@
 #include"Engine/Input.h"
 
 TitleScene::TitleScene(GameObject* parent)
-	:GameObject(parent,"TitleScene"),hImage_(-1),pText_(nullptr)
+	:GameObject(parent,"TitleScene"),hTitleImage_(-1),hPushImage_(-1), pText_(nullptr)
 {
 }
 
 void TitleScene::Initialize()
 {
-	hImage_ = Image::Load("Title.png");
-	assert(hImage_ >= 0);
-	transform_.position_.y = 0.03f;
+	hTitleImage_ = Image::Load("Title.png");
+	assert(hTitleImage_ >= 0);
+	hPushImage_ = Image::Load("PLESS TO SPACE.png");
+	assert(hPushImage_ >= 0);
 	pText_ = new Text;
 	pText_->Initialize();
 }
@@ -28,9 +29,16 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	Image::SetTransform(hImage_, transform_);
-	Image::Draw(hImage_);
-	pText_->Draw(500, 600, "Press to SPACE");
+	Transform titleTrans_;
+	titleTrans_.position_ = { 0,0.03f,0 };
+	Transform pushTrans_;
+	pushTrans_.position_ = { 0,-0.5,0 };
+	pushTrans_.scale_ = { 0.5,0.5,0.5 };
+	Image::SetTransform(hTitleImage_, titleTrans_);
+	Image::Draw(hTitleImage_);
+	Image::SetTransform(hPushImage_, pushTrans_);
+	Image::Draw(hPushImage_);
+	//pText_->Draw(500, 600, "Press to SPACE");
 }
 
 void TitleScene::Release()
