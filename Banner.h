@@ -6,6 +6,9 @@ class Banner :
 	int hReadyImage_;
 	int hGoImage_;
 	double cdTimer_;
+	Transform readyTrans;
+	Transform goTrans;
+	float scaleRate;
 public:
 	Banner(GameObject* parent);
 
@@ -31,5 +34,7 @@ public:
 
 	void SetState(State _state);
 	int GetState();
+	void SetScaleRate(float _scaleRate);
+	float GetScaleRate();
 };
 

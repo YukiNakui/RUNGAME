@@ -20,6 +20,7 @@ class PlayScene :
 	float sinImgAngle_;
 	XMFLOAT3 camPos_;
 	Transform imgTrans;
+	float scaleRate;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
