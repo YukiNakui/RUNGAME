@@ -15,6 +15,7 @@ void Enemy::Initialize()
 	transform_.position_.z = 20.0f;
 	transform_.rotate_.y = 180.0f;
 	moveSpeed_ = 0;
+	score = 0;
 	SphereCollider* collision = new SphereCollider(XMFLOAT3(0, 0.5f, 0), 0.5f);
 	AddCollider(collision);
 }
@@ -26,6 +27,7 @@ void Enemy::Update()
 	transform_.position_.z -= r;
 	if (transform_.position_.z <= -5.0f) 
 	{
+		score += 1;
 		KillMe();
 	}
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine/GameObject.h"
+#include"Engine/Text.h"
 class Banner :
     public GameObject
 {
@@ -9,6 +10,9 @@ class Banner :
 	Transform readyTrans;
 	Transform goTrans;
 	float scaleRate;
+	int playScore;
+	Text* pText;
+	
 public:
 	Banner(GameObject* parent);
 

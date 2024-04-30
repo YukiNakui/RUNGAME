@@ -2,6 +2,7 @@
 #include "Engine/GameObject.h"
 #include"Player.h"
 #include"Banner.h"
+#include"Engine/Text.h"
 
 class PlayScene :
     public GameObject
@@ -21,6 +22,9 @@ class PlayScene :
 	XMFLOAT3 camPos_;
 	Transform imgTrans;
 	float scaleRate;
+	Text* pText;
+	float correctCam;
+	float correctImg;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）

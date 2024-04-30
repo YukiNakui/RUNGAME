@@ -1,12 +1,16 @@
 #include "Banner.h"
 #include"Engine/Image.h"
+#include"Engine/SceneManager.h"
 
 Banner::Banner(GameObject* parent)
+	:GameObject(parent,"Banner"),pText(nullptr)
 {
 }
 
 void Banner::Initialize()
 {
+	pText = new Text;
+	pText->Initialize();
 	hReadyImage_ = Image::Load("READY.png");
 	assert(hReadyImage_ >= 0);
 	hGoImage_ = Image::Load("GO.png");
@@ -14,30 +18,15 @@ void Banner::Initialize()
 	cdTimer_ = 0.0f;
 	state_ = State::Ready;
 	scaleRate = 1.0f;
+	playScore = 0;
 	readyTrans.position_ = { 0,0,0 };
-	readyTrans.scale_ = { scaleRate,scaleRate,scaleRate };
 	goTrans.position_ = { 0,0,0 };
-	goTrans.scale_ = { scaleRate,scaleRate,scaleRate };
 }
 
 void Banner::Update()
 {
-	/*if (state_ == Ready)
-	{
-		scaleRate -= 12.0f / 60.0f;
-		if (scaleRate <= 1.0f)
-		{
-			scaleRate = 1.0f;
-		}
-	}
-	if (state_ == Go)
-	{
-		scaleRate -= 12.0f / 60.0f;
-		if (scaleRate <= 1.0f)
-		{
-			scaleRate = 1.0f;
-		}
-	}*/
+	readyTrans.scale_ = { scaleRate,scaleRate,scaleRate };
+	goTrans.scale_ = { scaleRate,scaleRate,scaleRate };
 }
 
 void Banner::Draw()
