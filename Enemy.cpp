@@ -28,6 +28,7 @@ void Enemy::Update()
 	if (transform_.position_.z <= -5.0f) 
 	{
 		score += 1;
+		pScore->SetScore(score);
 		KillMe();
 	}
 }

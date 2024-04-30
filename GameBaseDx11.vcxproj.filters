@@ -123,6 +123,9 @@
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Banner.cpp" />
+    <ClCompile Include="Score.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\BoxCollider.h">
@@ -219,6 +222,9 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Banner.h" />
+    <ClInclude Include="Score.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Assets\Shader\Simple2D.hlsl">

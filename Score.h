@@ -1,18 +1,16 @@
 #pragma once
 #include "Engine/GameObject.h"
-#include"Score.h"
+#include"Engine/Text.h"
 
-class Enemy :
+class Score :
     public GameObject
 {
-	int hModel_;
-	float moveSpeed_;
-	int score;
-	Score* pScore;
+	int playScore;
+	Text* pText;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
-	Enemy(GameObject* parent);
+	Score(GameObject* parent);
 
 	//初期化
 	void Initialize() override;
@@ -25,5 +23,8 @@ public:
 
 	//開放
 	void Release() override;
+
+	void SetScore(int _score);
+	int GetScore();
 };
 
